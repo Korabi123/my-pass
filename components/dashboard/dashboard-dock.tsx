@@ -21,7 +21,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { Dock, DockIcon } from "@/components/magicui/dock";
+import { Dock, DockIcon } from "@/components/framer-motion/dock";
 import { useTheme } from "next-themes";
 
 export type IconProps = React.HTMLAttributes<SVGElement>;
@@ -117,6 +117,7 @@ function DashDock({ className }: { className?: string }) {
                     variant="ghost"
                     size={"icon"}
                     onClick={() => setTheme("dark")}
+                    className="rounded-full size-10"
                   >
                     <MoonIcon className="size-5" />
                   </Button>
@@ -125,6 +126,7 @@ function DashDock({ className }: { className?: string }) {
                     variant="ghost"
                     size={"icon"}
                     onClick={() => setTheme("light")}
+                    className="rounded-full size-10"
                   >
                     <SunIcon className="size-5" />
                   </Button>

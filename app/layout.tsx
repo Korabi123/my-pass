@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={cn(inter.variable, calistoga.variable, "font-inter")}>
+        <body className={cn(inter.variable, calistoga.variable, "font-inter antialiased")}>
           <ThemeProvider
             attribute="class"
             defaultTheme="light"

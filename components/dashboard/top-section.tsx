@@ -8,7 +8,6 @@ import {
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbList,
-  BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
 import { UserButton } from "@clerk/nextjs";
@@ -18,7 +17,7 @@ const TopSection = () => {
   const currentUser = useUser();
 
   return (
-    <div className="w-full h-[50vh] bg-purple-500">
+    <div className="w-full h-[50vh] bg-purple-500 dark:bg-purple-600">
       <header className="flex max-w-screen-lg mx-auto lg:px-0 px-10 py-4 items-center justify-between">
         <Link href="/">
         <Image
@@ -29,20 +28,22 @@ const TopSection = () => {
         />
         </Link>
         <div className="flex items-center gap-10">
-          <BreadcrumbList>
-            <BreadcrumbItem className="text-white hover:text-muted-foreground transition">
-              <BreadcrumbLink href="/">Dashboard</BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator className="text-white" />
-            <BreadcrumbItem className="text-white hover:text-muted-foreground transition">
-              <BreadcrumbLink href="/">Home</BreadcrumbLink>
-            </BreadcrumbItem>
-          </BreadcrumbList>
+          <Breadcrumb className="text-white">
+            <BreadcrumbList>
+              <BreadcrumbItem>
+                <BreadcrumbLink slot="dashboard" className="text-white hover:text-white/70 transition" href="/">Dashboard</BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator className="text-white" />
+              <BreadcrumbItem>
+                <BreadcrumbLink slot="homeSection" className="text-white hover:text-white/70 transition" href="/">Home</BreadcrumbLink>
+              </BreadcrumbItem>
+            </BreadcrumbList>
+          </Breadcrumb>
           <UserButton />
         </div>
       </header>
-      <h1 className="text-white text-4xl pt-20 max-w-screen-lg mx-auto lg:px-0 px-10 font-bold">
-        Welcome back, {currentUser?.user?.firstName}!
+      <h1 className="text-white font-calistoga self-end text-3xl md:text-4xl lg:text-5xl pt-20 max-w-screen-lg mx-auto lg:px-0 px-10">
+        Welcome back, {currentUser?.user?.firstName} <img src="/waving-hand.png" alt="waving hand" className="size-9 lg:size-11 ml-2 -mt-1 inline-block" />
       </h1>
     </div>
   );
