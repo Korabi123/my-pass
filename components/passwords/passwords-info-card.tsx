@@ -23,6 +23,7 @@ const PasswordsInfoCard = () => {
                 loginEmail="john.doe@gmail.com"
                 passId="1234567890"
                 title="Google Account"
+                url="https://google.com"
                 isBig
               />
               <PasswordCard
@@ -30,6 +31,7 @@ const PasswordsInfoCard = () => {
                 loginEmail="john.doe@gmail.com"
                 passId="1234567890"
                 title="Netflix Account"
+                url="https://netflix.com"
                 isBig
               />
             </div>

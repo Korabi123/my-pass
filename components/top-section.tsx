@@ -30,7 +30,7 @@ const TopSection = ({ style }: { style?: "isGreeting" | "isCurrentPage" }) => {
           />
         </Link>
         <div className="flex items-center gap-10">
-          <Breadcrumb className="text-white">
+          <Breadcrumb className="text-white cursor-pointer">
             <BreadcrumbList>
               <BreadcrumbItem>
                 <BreadcrumbLink

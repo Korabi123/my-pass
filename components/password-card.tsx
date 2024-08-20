@@ -1,14 +1,16 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { useModalStore } from "@/hooks/useModalStore";
 import { ArrowUpRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 interface PasswordCardProps {
-  passId: string;
-  loginEmail: string;
-  title: string;
-  imgSrc: string;
+  passId: string | undefined;
+  loginEmail: string | undefined;
+  title: string | undefined;
+  imgSrc: string | undefined;
+  url: string | undefined;
   noPassword?: boolean;
   isBig?: boolean;
 }
@@ -18,9 +20,11 @@ const PasswordCard = ({
   loginEmail,
   title,
   imgSrc,
+  url,
   noPassword = false,
   isBig = false,
 }: PasswordCardProps) => {
+  const { onOpen } = useModalStore();
   const router = useRouter();
 
   if (noPassword) {
@@ -46,13 +50,16 @@ const PasswordCard = ({
               </div>
               <div className="flex flex-col gap-1">
                 <h3 className="font-semibold truncate w-[90%]">{title}</h3>
+                {/* <p className="leading-none text-sm text-muted-foreground">
+                  {url}
+                </p> */}
                 <p className="leading-none text-sm text-muted-foreground">
                   {loginEmail}
                 </p>
               </div>
             </div>
             <Button
-              onClick={() => router.push(`/passwords/${passId}`)}
+              onClick={() => onOpen("viewSavedPassword", { title, url, imgUrl: imgSrc, loginEmail, passId, createdAt: "2023-01-01" })}
               variant={"ghost"}
               size={"icon"}
             >
@@ -71,7 +78,7 @@ const PasswordCard = ({
               </p>
             </div>
             <Button
-              onClick={() => router.push(`/passwords/${passId}`)}
+              onClick={() => onOpen("viewSavedPassword", { title, url, imgUrl: imgSrc, loginEmail, passId, createdAt: "2023-01-01" })}
               variant={"ghost"}
               size={"icon"}
             >

@@ -69,12 +69,14 @@ const InfoSection = () => {
                 loginEmail="john.doe@gmail.com"
                 passId="1234567890"
                 title="Google Account"
+                url="https://google.com"
               />
               <PasswordCard
                 imgSrc="https://s2.googleusercontent.com/s2/favicons?domain=netflix.com"
                 loginEmail="john.doe@gmail.com"
                 passId="1234567890"
                 title="Netflix Account"
+                url="https://netflix.com"
               />
             </div>
           </CardContent>
