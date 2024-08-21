@@ -24,8 +24,8 @@ const OpenModalButton = ({
         onOpen(type, {
           createdAt: "",
           imgUrl: "",
-          loginEmail: "",
-          passId: "",
+          email: "",
+          id: "",
           password: "",
           title: "",
           url: "",
