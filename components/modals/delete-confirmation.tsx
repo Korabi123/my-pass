@@ -15,6 +15,7 @@ import { LoaderIcon, TriangleAlert } from "lucide-react";
 import axios from "axios";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { useUser } from "@clerk/nextjs";
 
 const DeleteConfirmationModal = () => {
   const { isOpen, type, onClose, data } = useModalStore();
@@ -22,6 +23,7 @@ const DeleteConfirmationModal = () => {
   const [isMounted, setIsMounted] = useState(false);
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
+  const currentUser = useUser();
 
   useEffect(() => {
     setIsMounted(true);
@@ -34,7 +36,21 @@ const DeleteConfirmationModal = () => {
   const onDeleteClick = async () => {
     startTransition(async () => {
       try {
-        await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/api/passwords/delete/${data.id}`);
+        // await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/api/passwords/delete/${data.id}`);
+
+        await axios.patch(`${process.env.NEXT_PUBLIC_API_URL}/api/passwords/update?passwordId=${data.id}`, JSON.stringify({
+          title: data.title,
+          url: data.url == null ? data.url : data.url,
+          email: data.email,
+          password: data.password,
+          userId: currentUser?.user?.id,
+          createdAt: data.createdAt,
+          isHidden: true,
+        }), {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
 
         toast.success("Password deleted successfully");
         onClose();

@@ -13,7 +13,7 @@ import { Plus } from "lucide-react";
 const PasswordsInfoCard = async () => {
   const user = await currentUser();
 
-  const passwordsByUser = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/passwords/get?userId=${user?.id}`);
+  const passwordsByUser = await axios.get<PasswordType[]>(`${process.env.NEXT_PUBLIC_API_URL}/api/passwords/get?userId=${user?.id}`);
 
   return (
     <div className="w-full">

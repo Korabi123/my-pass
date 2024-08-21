@@ -72,6 +72,7 @@ const EditPasswordSheet = () => {
           password: data.password == null ? previousData.password : data.password,
           userId: currentUser?.user?.id,
           createdAt: previousData.createdAt,
+          isHidden: false,
         }), {
           headers: {
             "Content-Type": "application/json",

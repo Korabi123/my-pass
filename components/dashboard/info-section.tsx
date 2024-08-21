@@ -10,20 +10,46 @@ import { PasswordType } from "@/app/PasswordType";
 const InfoSection = async () => {
   const user = await currentUser();
 
-  const passwordsByUser = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/passwords/get?userId=${user?.id}`);
+  const passwordsByUser = await axios.get<PasswordType[]>(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/passwords/get?userId=${user?.id}`
+  );
 
-  const passwordsByJanuary = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/passwords/get?userId=${user?.id}&createdAtMonth=January`);
-  const passwordsByFebruary = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/passwords/get?userId=${user?.id}&createdAtMonth=Febuary`);
-  const passwordsByMarch = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/passwords/get?userId=${user?.id}&createdAtMonth=March`);
-  const passwordsByApril = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/passwords/get?userId=${user?.id}&createdAtMonth=April`);
-  const passwordsByMay = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/passwords/get?userId=${user?.id}&createdAtMonth=May`);
-  const passwordsByJune = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/passwords/get?userId=${user?.id}&createdAtMonth=June`);
-  const passwordsByJuly = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/passwords/get?userId=${user?.id}&createdAtMonth=July`);
-  const passwordsByAugust = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/passwords/get?userId=${user?.id}&createdAtMonth=August`);
-  const passwordsBySeptember = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/passwords/get?userId=${user?.id}&createdAtMonth=September`);
-  const passwordsByOctober = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/passwords/get?userId=${user?.id}&createdAtMonth=October`);
-  const passwordsByNovember = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/passwords/get?userId=${user?.id}&createdAtMonth=November`);
-  const passwordsByDecember = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/passwords/get?userId=${user?.id}&createdAtMonth=December`);
+  const passwordsByJanuary = await axios.get(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/passwords/get?userId=${user?.id}&createdAtMonth=January`
+  );
+  const passwordsByFebruary = await axios.get(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/passwords/get?userId=${user?.id}&createdAtMonth=Febuary`
+  );
+  const passwordsByMarch = await axios.get(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/passwords/get?userId=${user?.id}&createdAtMonth=March`
+  );
+  const passwordsByApril = await axios.get(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/passwords/get?userId=${user?.id}&createdAtMonth=April`
+  );
+  const passwordsByMay = await axios.get(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/passwords/get?userId=${user?.id}&createdAtMonth=May`
+  );
+  const passwordsByJune = await axios.get(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/passwords/get?userId=${user?.id}&createdAtMonth=June`
+  );
+  const passwordsByJuly = await axios.get(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/passwords/get?userId=${user?.id}&createdAtMonth=July`
+  );
+  const passwordsByAugust = await axios.get(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/passwords/get?userId=${user?.id}&createdAtMonth=August`
+  );
+  const passwordsBySeptember = await axios.get(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/passwords/get?userId=${user?.id}&createdAtMonth=September`
+  );
+  const passwordsByOctober = await axios.get(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/passwords/get?userId=${user?.id}&createdAtMonth=October`
+  );
+  const passwordsByNovember = await axios.get(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/passwords/get?userId=${user?.id}&createdAtMonth=November`
+  );
+  const passwordsByDecember = await axios.get(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/passwords/get?userId=${user?.id}&createdAtMonth=December`
+  );
 
   let chartData: any[] = [];
 
@@ -36,8 +62,6 @@ const InfoSection = async () => {
     cMonth === "April" ||
     cMonth === "May" ||
     cMonth === "June";
-
-
 
   // console.log(`Passwords in january: ${passwordsByJanuary.data.length}`);
   // console.log(`Passwords in february: ${passwordsByFebruary.data.length}`);
@@ -62,25 +86,36 @@ const InfoSection = async () => {
   } satisfies ChartConfig;
 
   half1
-  ? (chartData = [
-      { month: "January", createdPasswords: passwordsByJanuary.data.length },
-      { month: "January", createdPasswords: passwordsByJanuary.data.length },
-      { month: "February", createdPasswords: passwordsByFebruary.data.length },
-      { month: "March", createdPasswords: passwordsByMarch.data.length },
-      { month: "April", createdPasswords: passwordsByApril.data.length },
-      { month: "May", createdPasswords: passwordsByMay.data.length },
-      { month: "June", createdPasswords: passwordsByJune.data.length },
-    ])
-  : (chartData = [
-      { month: "July", createdPasswords: passwordsByJuly.data.length },
-      { month: "July", createdPasswords: passwordsByJuly.data.length },
-      { month: "August", createdPasswords: passwordsByAugust.data.length },
-      { month: "September", createdPasswords: passwordsBySeptember.data.length },
-      { month: "October", createdPasswords: passwordsByOctober.data.length },
-      { month: "November", createdPasswords: passwordsByNovember.data.length },
-      { month: "December", createdPasswords: passwordsByDecember.data.length },
-    ]);
-
+    ? (chartData = [
+        { month: "January", createdPasswords: passwordsByJanuary.data.length },
+        { month: "January", createdPasswords: passwordsByJanuary.data.length },
+        {
+          month: "February",
+          createdPasswords: passwordsByFebruary.data.length,
+        },
+        { month: "March", createdPasswords: passwordsByMarch.data.length },
+        { month: "April", createdPasswords: passwordsByApril.data.length },
+        { month: "May", createdPasswords: passwordsByMay.data.length },
+        { month: "June", createdPasswords: passwordsByJune.data.length },
+      ])
+    : (chartData = [
+        { month: "July", createdPasswords: passwordsByJuly.data.length },
+        { month: "July", createdPasswords: passwordsByJuly.data.length },
+        { month: "August", createdPasswords: passwordsByAugust.data.length },
+        {
+          month: "September",
+          createdPasswords: passwordsBySeptember.data.length,
+        },
+        { month: "October", createdPasswords: passwordsByOctober.data.length },
+        {
+          month: "November",
+          createdPasswords: passwordsByNovember.data.length,
+        },
+        {
+          month: "December",
+          createdPasswords: passwordsByDecember.data.length,
+        },
+      ]);
 
   return (
     <div className="w-full">
@@ -98,18 +133,18 @@ const InfoSection = async () => {
               {passwordsByUser.data.length > 0 ? (
                 <>
                   {passwordsByUser.data.map((password: PasswordType) => (
-                  <PasswordCard
-                    imgSrc={`https://s2.googleusercontent.com/s2/favicons?domain=${password.url}`}
-                    loginEmail={password.email}
-                    passId={password.id}
-                    title={password.url}
-                    url={password.url}
-                    password={password.password}
-                    key={password.id}
-                    createdAt={password.createdAt}
-                    createdAtMonth={password.createdAtMonth}
-                  />
-                ))}
+                    <PasswordCard
+                      imgSrc={`https://s2.googleusercontent.com/s2/favicons?domain=${password.url}`}
+                      loginEmail={password.email}
+                      passId={password.id}
+                      title={password.title}
+                      url={password.url}
+                      password={password.password}
+                      key={password.id}
+                      createdAt={password.createdAt}
+                      createdAtMonth={password.createdAtMonth}
+                    />
+                  ))}
                 </>
               ) : (
                 <PasswordCard

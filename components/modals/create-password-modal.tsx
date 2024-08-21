@@ -73,6 +73,7 @@ const CreatePasswordModal = () => {
       password: data.password,
       createdAt: new Date().toISOString(),
       createdAtMonth: currentMonth(),
+      isHidden: false,
     }]);
 
     startTransition(async () => {

@@ -78,7 +78,7 @@ const PasswordCard = ({
               <img src={imgSrc} alt="site favicon" className="size-5" />
             </div>
             <div className="flex flex-col gap-1">
-              <h3 className="font-semibold truncate w-[90%]">{title}</h3>
+              <h3 className="font-semibold truncate w-[90%]">{url}</h3>
               <p className="leading-none text-sm text-muted-foreground">
                 {loginEmail}
               </p>

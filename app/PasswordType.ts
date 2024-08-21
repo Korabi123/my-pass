@@ -7,4 +7,5 @@ export type PasswordType = {
   password: string;
   createdAt: string;
   createdAtMonth: string;
+  isHidden: boolean;
 };
