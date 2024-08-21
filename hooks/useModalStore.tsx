@@ -1,14 +1,16 @@
 import { create } from 'zustand';
 
-export type ModalStoreType = "viewSavedPassword" | "deleteConfirmation" | "editPasswordSheet";
+export type ModalStoreType = "viewSavedPassword" | "deleteConfirmation" | "editPasswordSheet" | "createPassword";
 
 interface ModalStoreData {
   title?: string;
   url?: string;
   imgUrl?: string;
-  loginEmail?: string;
-  passId?: string;
+  email?: string;
+  id?: string;
   createdAt?: string;
+  createdAtMonth?: string;
+  password?: string;
 }
 
 interface ModalStoreInterface {

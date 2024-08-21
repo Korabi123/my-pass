@@ -11,15 +11,17 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Input } from "../ui/input";
-import { Label } from "../ui/label";
-import PasswordCard from "../password-card";
-import { TriangleAlert } from "lucide-react";
+import { LoaderIcon, TriangleAlert } from "lucide-react";
+import axios from "axios";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 const DeleteConfirmationModal = () => {
   const { isOpen, type, onClose, data } = useModalStore();
   const isModalOpen = isOpen && type === "deleteConfirmation";
   const [isMounted, setIsMounted] = useState(false);
+  const [isPending, startTransition] = useTransition();
+  const router = useRouter();
 
   useEffect(() => {
     setIsMounted(true);
@@ -27,6 +29,20 @@ const DeleteConfirmationModal = () => {
 
   if (!isMounted) {
     return null;
+  }
+
+  const onDeleteClick = async () => {
+    startTransition(async () => {
+      try {
+        await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/api/passwords/delete/${data.id}`);
+
+        toast.success("Password deleted successfully");
+        onClose();
+        router.refresh();
+      } catch (error) {
+        toast.error("Something went wrong");
+      }
+    });
   }
 
   return (
@@ -44,8 +60,10 @@ const DeleteConfirmationModal = () => {
           </div>
         </div>
         <DialogFooter>
-          <Button className="w-full" variant={"outline"} onClick={onClose}>Cancel</Button>
-          <Button className="w-full" variant={"destructive"} onClick={onClose}>Delete</Button>
+          <Button className="w-full" variant={"outline"} disabled={isPending} onClick={onClose}>Cancel</Button>
+          <Button className="w-full" variant={"destructive"} disabled={isPending} onClick={onDeleteClick}>
+            {isPending ? <LoaderIcon className="animate-spin size-5 text-muted-foreground" /> : "Delete"}
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

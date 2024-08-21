@@ -11,6 +11,9 @@ interface PasswordCardProps {
   title: string | undefined;
   imgSrc: string | undefined;
   url: string | undefined;
+  password?: string | undefined;
+  createdAt?: string | undefined;
+  createdAtMonth?: string | undefined;
   noPassword?: boolean;
   isBig?: boolean;
 }
@@ -23,6 +26,9 @@ const PasswordCard = ({
   url,
   noPassword = false,
   isBig = false,
+  password,
+  createdAt,
+  createdAtMonth,
 }: PasswordCardProps) => {
   const { onOpen } = useModalStore();
   const router = useRouter();
@@ -59,7 +65,7 @@ const PasswordCard = ({
               </div>
             </div>
             <Button
-              onClick={() => onOpen("viewSavedPassword", { title, url, imgUrl: imgSrc, loginEmail, passId, createdAt: "2023-01-01" })}
+              onClick={() => onOpen("viewSavedPassword", { title, url, imgUrl: imgSrc, email: loginEmail, id: passId, createdAt, password })}
               variant={"ghost"}
               size={"icon"}
             >
@@ -78,7 +84,7 @@ const PasswordCard = ({
               </p>
             </div>
             <Button
-              onClick={() => onOpen("viewSavedPassword", { title, url, imgUrl: imgSrc, loginEmail, passId, createdAt: "2023-01-01" })}
+              onClick={() => onOpen("viewSavedPassword", { title, url, imgUrl: imgSrc, email: loginEmail, id: passId, createdAt, password })}
               variant={"ghost"}
               size={"icon"}
             >
